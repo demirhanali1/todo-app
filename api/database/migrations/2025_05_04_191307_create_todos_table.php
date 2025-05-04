@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('status', App\Enums\TodoStatus::values())->default(App\Enums\TodoStatus::Pending->value);
             $table->enum('priority', App\Enums\TodoPriority::values())->default(App\Enums\TodoPriority::Medium->value);
             $table->dateTime('due_date');
