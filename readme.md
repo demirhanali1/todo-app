@@ -72,3 +72,6 @@ Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
 ### 4. Middleware
 - Throttle ve sanitize middleware kulalnılmıştır.
 - Throttle middleware üst üste her 5 request sonrası 1 dakika ip ban işlemi yapar.
+
+### 5. Form Request
+- Input validation için form request sınıfları kullanılmıştır.
