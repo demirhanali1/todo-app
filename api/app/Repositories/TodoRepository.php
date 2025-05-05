@@ -36,4 +36,9 @@ class TodoRepository
     {
         return Todo::with('categories')->where('id', $id)->firstOrFail();
     }
+
+    public function delete(int $id)
+    {
+        return Todo::destroy($id);
+    }
 }

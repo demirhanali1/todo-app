@@ -19,9 +19,12 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return ResponseFormatter::returnOk(
+            message: 'success',
+            data: $this->service->index($request)
+        );
     }
 
     /**
@@ -40,7 +43,10 @@ class TodoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return ResponseFormatter::returnOk(
+            message: 'success',
+            data: $this->service->find($id)
+        );
     }
 
     /**
@@ -56,6 +62,9 @@ class TodoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return ResponseFormatter::returnDeleted(
+            message: 'success',
+            data: $this->service->delete($id)
+        );
     }
 }
