@@ -49,16 +49,16 @@ Proje boyunca aşağıdaki yazılım prensiplerine dikkat edilmiştir:
 
 Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
 
-### 1. ✅ **Repository Pattern**
+### 1. Repository Pattern
 - Veritabanı işlemleri `App\Repositories` klasöründe soyutlanmıştır.
 - Örnek: `TodoRepository`, `StatsRepository`
 
-### 2. ✅ **Service Layer**
+### 2. Service Layer
 - İş mantığı `App\Services` klasöründe tutulur.
 - Controller'lar doğrudan model ile değil, servis katmanı ile iletişim kurar.
 - Örnek: `TodoService`, `StatsService`
 
-### 3. ✅ **Dependency Injection**
+### 3. Dependency Injection
 - Laravel'in service container'ı aracılığıyla controller ve service katmanına bağımlılıklar otomatik olarak enjekte edilir.
 - Örnek:
   ```php
@@ -68,3 +68,7 @@ Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
     public function __construct(
         private CategoryService $service
     ){}
+  
+### 4. Middleware
+- Throttle ve sanitize middleware kulalnılmıştır.
+- Throttle middleware üst üste her 5 request sonrası 1 dakika ip ban işlemi yapar.
