@@ -71,4 +71,15 @@ class TodoController extends Controller
             data: $this->service->delete($id)
         );
     }
+
+    /**
+     * Search the specified resource.
+     */
+    public function search(Request $request)
+    {
+        return ResponseFormatter::returnOk(
+            message: 'success',
+            data: $this->service->search($request)
+        );
+    }
 }

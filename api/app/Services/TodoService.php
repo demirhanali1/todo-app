@@ -62,4 +62,23 @@ class TodoService
 
         return $query->paginate($limit);
     }
+
+    public function search(Request $request)
+    {
+        $q = $request->input('q');
+
+        $query = Todo::with('categories');
+
+        if ($q) {
+            $query->where(function ($qBuilder) use ($q) {
+                $qBuilder->where('title', 'like', "%{$q}%")
+                    ->orWhere('description', 'like', "%{$q}%");
+            });
+        }
+
+        // Opsiyonel: sayfalama
+        $limit = min((int) $request->input('limit', 10), 50);
+
+        return $query->paginate($limit);
+    }
 }
