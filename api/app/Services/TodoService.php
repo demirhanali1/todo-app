@@ -12,4 +12,9 @@ class TodoService
     public function __construct(
         private TodoRepository $repo
     ){}
+
+    public function create(array $data)
+    {
+        return $this->repo->create($data);
+    }
 }

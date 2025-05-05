@@ -10,4 +10,9 @@ class Todo extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'todo_category');
+    }
 }

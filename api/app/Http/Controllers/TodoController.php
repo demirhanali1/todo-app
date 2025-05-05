@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\ResponseFormatter;
 use App\Http\Requests\TodoCreateValidation;
 use App\Services\TodoService;
 use Illuminate\Http\Request;
@@ -28,7 +29,10 @@ class TodoController extends Controller
      */
     public function store(TodoCreateValidation $request)
     {
-        //
+        return ResponseFormatter::returnCreated(
+            message: 'success',
+            data: $this->service->create($request->validated())
+        );
     }
 
     /**

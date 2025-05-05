@@ -30,6 +30,8 @@ class TodoCreateValidation extends FormRequest
             'status' => Rule::in(TodoStatus::values()),
             'priority' => Rule::in(TodoPriority::values()),
             'due_date' => 'required|date|after:today',
+            'category_ids' => 'required|array',
+            'category_ids.*' => 'exists:categories,id',
         ];
     }
 }
