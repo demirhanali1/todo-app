@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Core\ResponseFormatter;
 use App\Http\Requests\TodoCreateValidation;
+use App\Http\Requests\TodoUpdateValidation;
 use App\Services\TodoService;
 use Illuminate\Http\Request;
 
@@ -52,9 +53,12 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TodoUpdateValidation $request, string $id)
     {
-        //
+        return ResponseFormatter::returnCreated(
+            message: 'success',
+            data: $this->service->update($request->validated(), $id)
+        );
     }
 
     /**

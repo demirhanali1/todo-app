@@ -30,6 +30,11 @@ class TodoService
         return $this->repo->delete($id);
     }
 
+    public function update(array $params, int $id)
+    {
+        return $this->repo->update($params, $id);
+    }
+
     public function index(Request $request)
     {
         $query = Todo::with('categories');

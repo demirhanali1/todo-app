@@ -41,4 +41,11 @@ class TodoRepository
     {
         return Todo::destroy($id);
     }
+
+    public function update(array $params, int $id)
+    {
+        return Todo::where('id', $id)->update([
+            'status' => $params['status'],
+        ]);
+    }
 }
