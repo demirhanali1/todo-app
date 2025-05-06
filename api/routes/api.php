@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\TodoController;
 use App\Http\Middleware\SanitizeInputMiddleware;
@@ -15,4 +16,6 @@ Route::middleware([SanitizeInputMiddleware::class])->group(function () {
         Route::get('todos', [StatsController::class, 'todoStatusCounts']);
         Route::get('priorities', [StatsController::class, 'todoPriorityCounts']);
     });
+
+    Route::apiResource('dashboard', DashboardController::class);
 });

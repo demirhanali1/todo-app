@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Todo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class TodoRepository
@@ -47,5 +48,12 @@ class TodoRepository
         return Todo::where('id', $id)->update([
             'status' => $params['status'],
         ]);
+    }
+
+    public function upcoming()
+    {
+        return Todo::where('due_date', '>=', Carbon::now())  // Gelecekteki görevler
+        ->orderBy('due_date', 'asc')  // Yaklaşan görevleri önce al
+        ->get();
     }
 }
