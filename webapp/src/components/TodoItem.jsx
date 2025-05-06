@@ -19,6 +19,12 @@ const TodoItem = ({ todo, onStatusChange }) => {
                     </option>
                 ))}
             </select>
+
+            <button
+                className="edit-btn"
+            >
+                Düzenle
+            </button>
         </div>
     );
 };

@@ -24,6 +24,11 @@ const Dashboard = () => {
         <div className="dashboard-container">
             <h1 className="section-title">Dashboard</h1>
 
+            <div className="nav-buttons">
+                <button className="nav-btn">Tüm Görevler</button>
+                <button className="nav-btn">Yeni Görev Ekle</button>
+            </div>
+
             <div className="status-grid">
                 <StatusCard status="Cancelled" count={dashboard.statusCount.cancelled} />
                 <StatusCard status="Completed" count={dashboard.statusCount.completed} />
