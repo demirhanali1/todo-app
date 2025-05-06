@@ -4,9 +4,11 @@ import {fetchDashboardApi, updateTodoStatus} from '../features/todos/todoSlice';
 import StatusCard from '../components/StatusCard';
 import TodoItem from '../components/TodoItem';
 import StatePagination from "../components/StatePagination.jsx";
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { dashboard, loading } = useSelector((state) => state.todos);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -33,8 +35,8 @@ const Dashboard = () => {
             <h1 className="section-title">Dashboard</h1>
 
             <div className="nav-buttons">
-                <button className="nav-btn">Tüm Görevler</button>
-                <button className="nav-btn">Yeni Görev Ekle</button>
+                <button className="nav-btn" onClick={() => navigate('/todos')}>Todo List</button>
+                <button className="nav-btn">Todo Oluştur</button>
             </div>
 
             <div className="status-grid">

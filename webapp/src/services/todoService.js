@@ -1,12 +1,7 @@
 import api from '../api/api.js';
 
-export const getStatsTodos = async () => {
-    const res = await api.get('/stats/todos');
-    return res.data.data;
-};
-
-export const getStatsPriorities = async () => {
-    const res = await api.get('/stats/priorities');
+export const getTodos = async () => {
+    const res = await api.get('/todos');
     return res.data.data;
 };
 

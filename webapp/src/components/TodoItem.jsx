@@ -15,7 +15,7 @@ const TodoItem = ({ todo, onStatusChange }) => {
             >
                 {statuses.map((status) => (
                     <option key={status} value={status}>
-                        <p>{status}</p>
+                        {status}
                     </option>
                 ))}
             </select>
