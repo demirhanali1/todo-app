@@ -29,6 +29,15 @@ const todoSlice = createSlice({
             .addCase(fetchDashboardApi.rejected, (state, action) => {
                 state.loading = false; // Yükleme hatalı durumda da false
             })
+            .addCase(updateTodoStatus.fulfilled, (state, action) => {
+                const todoId = action.meta.arg.id;
+                const todoStatus = action.meta.arg.status;
+
+                const todo = state.dashboard.upcomingTodos.find(t => t.id === todoId);
+                if (todo) {
+                    todo.status = todoStatus;
+                }
+            });
     },
 });
 

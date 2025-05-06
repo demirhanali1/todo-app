@@ -37,9 +37,13 @@ const Dashboard = () => {
             </div>
 
             {/* Yaklaşan görevler */}
-            <div>
+            <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-2">Yaklaşan Görevler</h2>
-
+                <div className="space-y-4">
+                    {dashboard.upcomingTodos?.map((todo) => (
+                        <TodoItem key={todo.id} todo={todo} onStatusChange={handleStatusChange} />
+                    ))}
+                </div>
             </div>
         </div>
     );
