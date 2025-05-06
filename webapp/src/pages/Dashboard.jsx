@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {fetchDashboardApi, updateTodoStatus} from '../features/todos/todoSlice';
 import StatusCard from '../components/StatusCard';
 import TodoItem from '../components/TodoItem';
+import StatePagination from "../components/StatePagination.jsx";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
     const { dashboard, loading } = useSelector((state) => state.todos);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         dispatch(fetchDashboardApi());
@@ -19,6 +21,12 @@ const Dashboard = () => {
     if (loading) {
         return <div>Yükleniyor...</div>;  // Burada loading spinner ya da message kullanabilirsin
     }
+
+    const todosPerPage = 5;
+    const indexOfLastTodo = currentPage * todosPerPage;
+    const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+    const currentTodos = dashboard.upcomingTodos?.slice(indexOfFirstTodo, indexOfLastTodo);
+    const totalPages = Math.ceil((dashboard.upcomingTodos?.length || 0) / todosPerPage);
 
     return (
         <div className="dashboard-container">
@@ -39,10 +47,16 @@ const Dashboard = () => {
             <div>
                 <h2 className="section-title">Yaklaşan Görevler</h2>
                 <div className="todo-list">
-                    {dashboard.upcomingTodos?.map((todo) => (
+                    {currentTodos?.map((todo) => (
                         <TodoItem key={todo.id} todo={todo} onStatusChange={handleStatusChange} />
                     ))}
                 </div>
+
+                <StatePagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={setCurrentPage}
+                />
             </div>
         </div>
     );

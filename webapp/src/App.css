@@ -132,3 +132,58 @@ h1, h2, h3, h4 {
 .edit-btn:hover {
   background-color: #059669;
 }
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  gap: 8px;
+}
+
+.pagination-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-button:hover:not(.disabled) {
+  background-color: #e5e7eb;
+}
+
+.pagination-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f3f4f6;
+}
+
+.pagination-current-page {
+  padding: 8px 16px;
+  background-color: #e5e7eb;
+  color: #1f2937;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.pagination-number-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: #f9fafb;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination-number-button:hover {
+  background-color: #e5e7eb;
+}
+
+.pagination-ellipsis {
+  color: #6b7280;
+  padding: 0 4px;
+}
