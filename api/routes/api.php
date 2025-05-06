@@ -6,7 +6,7 @@ use App\Http\Controllers\TodoController;
 use App\Http\Middleware\SanitizeInputMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware([SanitizeInputMiddleware::class, 'throttle:5,1'])->group(function () {
+Route::middleware([SanitizeInputMiddleware::class])->group(function () {
     Route::get('todos/search', [TodoController::class, 'search']);
     Route::apiResource('todos', TodoController::class);
     Route::apiResource('categories', CategoryController::class);
