@@ -21,25 +21,19 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+        <div className="dashboard-container">
+            <h1 className="section-title">Dashboard</h1>
 
-            {/* Duruma göre istatistik kartları */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="grid grid-cols-2 gap-4">
-                        <StatusCard status="Cancelled" count={dashboard.statusCount.cancelled} />
-                        <StatusCard status="Completed" count={dashboard.statusCount.completed} />
-                        <StatusCard status="In Progress" count={dashboard.statusCount.in_progress} />
-                        <StatusCard status="Pending" count={dashboard.statusCount.pending} />
-                    </div>
-                </div>
+            <div className="status-grid">
+                <StatusCard status="Cancelled" count={dashboard.statusCount.cancelled} />
+                <StatusCard status="Completed" count={dashboard.statusCount.completed} />
+                <StatusCard status="In Progress" count={dashboard.statusCount.in_progress} />
+                <StatusCard status="Pending" count={dashboard.statusCount.pending} />
             </div>
 
-            {/* Yaklaşan görevler */}
-            <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Yaklaşan Görevler</h2>
-                <div className="space-y-4">
+            <div>
+                <h2 className="section-title">Yaklaşan Görevler</h2>
+                <div className="todo-list">
                     {dashboard.upcomingTodos?.map((todo) => (
                         <TodoItem key={todo.id} todo={todo} onStatusChange={handleStatusChange} />
                     ))}

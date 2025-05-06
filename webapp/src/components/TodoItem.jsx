@@ -4,19 +4,18 @@ const TodoItem = ({ todo, onStatusChange }) => {
     const statuses = ['pending', 'in_progress', 'completed'];
 
     return (
-        <div className="flex justify-between items-center bg-gray-100 p-3 rounded">
+        <div className="todo-item">
             <div>
-                <h4 className="font-semibold">{todo.title}</h4>
-                <p className="text-sm text-gray-600">{todo.due_date}</p>
+                <h4>{todo.title}</h4>
+                <p>{todo.due_date}</p>
             </div>
             <select
                 value={todo.status}
                 onChange={(e) => onStatusChange(todo.id, e.target.value)}
-                className="border rounded p-1"
             >
                 {statuses.map((status) => (
                     <option key={status} value={status}>
-                        {status}
+                        <p>{status}</p>
                     </option>
                 ))}
             </select>
