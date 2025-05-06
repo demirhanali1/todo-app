@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTodoStats, fetchUpcomingTodos, updateTodoStatus } from '../features/todos/todoSlice';
+import { fetchStatsTodos, fetchStatsPriorities, updateTodoStatus } from '../features/todos/todoSlice';
 import StatusCard from '../components/StatusCard';
 import TodoItem from '../components/TodoItem';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const { stats, upcoming, loading } = useSelector((state) => state.todos);
+    const { stats, priorities, loading } = useSelector((state) => state.todos);
 
     useEffect(() => {
-        dispatch(fetchTodoStats());
-        dispatch(fetchUpcomingTodos());
+        dispatch(fetchStatsTodos());
+        dispatch(fetchStatsPriorities());
     }, [dispatch]);
 
     const handleStatusChange = (id, status) => {
         dispatch(updateTodoStatus({ id, status }));
     };
+
+    if (loading) {
+        return <div>Yükleniyor...</div>;  // Burada loading spinner ya da message kullanabilirsin
+    }
 
     return (
         <div className="p-4">
@@ -23,23 +27,20 @@ const Dashboard = () => {
 
             {/* Duruma göre istatistik kartları */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                {stats.map((item) => (
-                    <StatusCard key={item.status} status={item.status} count={item.count} />
-                ))}
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <StatusCard status="Cancelled" count={stats.cancelled} />
+                        <StatusCard status="Completed" count={stats.completed} />
+                        <StatusCard status="In Progress" count={stats.in_progress} />
+                        <StatusCard status="Pending" count={stats.pending} />
+                    </div>
+                </div>
             </div>
 
             {/* Yaklaşan görevler */}
             <div>
                 <h2 className="text-xl font-semibold mb-2">Yaklaşan Görevler</h2>
-                {loading ? (
-                    <p>Yükleniyor...</p>
-                ) : (
-                    <div className="space-y-2">
-                        {upcoming.map((todo) => (
-                            <TodoItem key={todo.id} todo={todo} onStatusChange={handleStatusChange} />
-                        ))}
-                    </div>
-                )}
+
             </div>
         </div>
     );

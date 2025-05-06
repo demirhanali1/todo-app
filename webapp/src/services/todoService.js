@@ -1,12 +1,12 @@
 import api from '../api/api.js';
 
-export const getTodoStats = async () => {
+export const getStatsTodos = async () => {
     const res = await api.get('/stats/todos');
-    return res.data;
+    return res.data.data;
 };
 
-export const getUpcomingTodos = async () => {
-    const res = await api.get('/todos?sort=due_date&order=asc&limit=5');
+export const getStatsPriorities = async () => {
+    const res = await api.get('/stats/priorities');
     return res.data.data;
 };
 

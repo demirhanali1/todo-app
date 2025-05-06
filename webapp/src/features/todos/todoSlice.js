@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
-    getTodoStats,
-    getUpcomingTodos,
+    getStatsTodos,
+    getStatsPriorities,
     patchTodoStatus,
 } from '../../services/todoService';
 
-export const fetchTodoStats = createAsyncThunk('todos/fetchStats', getTodoStats);
-export const fetchUpcomingTodos = createAsyncThunk('todos/fetchUpcoming', getUpcomingTodos);
+export const fetchStatsTodos = createAsyncThunk('stats/todos', getStatsTodos);
+export const fetchStatsPriorities = createAsyncThunk('stats/priorities', getStatsPriorities);
 export const updateTodoStatus = createAsyncThunk(
     'todos/updateStatus',
     async ({ id, status }) => await patchTodoStatus(id, status)
@@ -15,28 +15,50 @@ export const updateTodoStatus = createAsyncThunk(
 const todoSlice = createSlice({
     name: 'todos',
     initialState: {
-        stats: [],
-        upcoming: [],
-        loading: false,
+        stats: {},
+        priorities: {},
+        loading: true,
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchTodoStats.fulfilled, (state, action) => {
-                state.stats = action.payload;
+            // fetchStatsTodos işlemi için durumları tanımla
+            .addCase(fetchStatsTodos.pending, (state) => {
+                state.loading = true; // Veriler yükleniyor
             })
-            .addCase(fetchUpcomingTodos.pending, (state) => {
-                state.loading = true;
+            .addCase(fetchStatsTodos.fulfilled, (state, action) => {
+                state.stats = action.payload; // action.payload'yi al
+                state.loading = false; // Yükleme tamamlandı
             })
-            .addCase(fetchUpcomingTodos.fulfilled, (state, action) => {
-                state.loading = false;
-                state.upcoming = action.payload;
+            .addCase(fetchStatsTodos.rejected, (state, action) => {
+                state.loading = false; // Yükleme hatalı durumda da false
+                state.error = action.error.message; // Hata mesajını kaydet
+            })
+
+            // fetchStatsPriorities işlemi için durumları tanımla
+            .addCase(fetchStatsPriorities.pending, (state) => {
+                state.loading = true; // Veriler yükleniyor
+            })
+            .addCase(fetchStatsPriorities.fulfilled, (state, action) => {
+                state.priorities = action.payload; // action.payload'yi al
+                state.loading = false; // Yükleme tamamlandı
+            })
+            .addCase(fetchStatsPriorities.rejected, (state, action) => {
+                state.loading = false; // Yükleme hatalı durumda da false
+                state.error = action.error.message; // Hata mesajını kaydet
+            })
+
+            // updateTodoStatus işlemi için durumları tanımla
+            .addCase(updateTodoStatus.pending, (state) => {
+                state.loading = true; // Status güncelleniyor
             })
             .addCase(updateTodoStatus.fulfilled, (state, action) => {
-                const index = state.upcoming.findIndex(todo => todo.id === action.payload.id);
-                if (index !== -1) {
-                    state.upcoming[index] = action.payload;
-                }
+                state.loading = false; // Yükleme tamamlandı
+                // Todo'nun durumunu güncelleyebilirsiniz
+            })
+            .addCase(updateTodoStatus.rejected, (state, action) => {
+                state.loading = false; // Hata durumunda da loading false
+                state.error = action.error.message; // Hata mesajını kaydet
             });
     },
 });
