@@ -38,6 +38,7 @@ const TodoList = () => {
             <div className="mt-4">
                 <ServerSidePagination
                     paginateData={apiData}
+                    onPageChange={(page) => fetchTodos(page)}
                 />
             </div>
         </div>
