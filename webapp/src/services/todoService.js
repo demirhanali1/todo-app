@@ -1,7 +1,19 @@
 import api from '../api/api.js';
+import axios from "axios";
 
-export const getTodos = async () => {
-    const res = await api.get('/todos');
+export const getTodos = async (nextPage = null) => {
+    let res;
+
+    if (nextPage === null) {
+        res = await api.get('/todos');
+    } else {
+        res = await axios.get(nextPage, {
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
+    }
+
     return res.data.data;
 };
 
