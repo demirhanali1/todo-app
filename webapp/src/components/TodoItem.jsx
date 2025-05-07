@@ -20,11 +20,19 @@ const TodoItem = ({ todo, onStatusChange }) => {
                 ))}
             </select>
 
-            <button
-                className="edit-btn"
-            >
-                Düzenle
-            </button>
+            <div>
+                <button
+                    className="edit-btn"
+                >
+                    Düzenle
+                </button>
+
+                <button
+                    className="delete-btn"
+                >
+                    Sil
+                </button>
+            </div>
         </div>
     );
 };

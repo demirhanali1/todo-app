@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getTodos } from '../services/todoService.js';
+import TodoItem from "../components/TodoItem.jsx";
+import {updateTodoStatus} from "../features/todos/todoSlice.js";
+import {useDispatch} from "react-redux";
 
 const TodoList = () => {
+    const dispatch = useDispatch();
     const [todos, setTodos] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('');
@@ -25,24 +29,12 @@ const TodoList = () => {
         fetchTodos();
     }, [searchTerm, statusFilter, priorityFilter, currentPage]);
 
-    const handleToggleStatus = (id) => {
-        setTodos(prev =>
-            prev.map(todo =>
-                todo.id === id ? { ...todo, status: todo.status === 'done' ? 'pending' : 'done' } : todo
-            )
-        );
-    };
-
-    const handleEdit = (id) => {
-        console.log('Edit', id);
-    };
-
-    const handleDelete = (id) => {
-        setTodos(prev => prev.filter(todo => todo.id !== id));
+    const handleStatusChange = (id, status) => {
+        dispatch(updateTodoStatus({ id, status }));
     };
 
     return (
-        <div className="p-4 space-y-4">
+        <div className="dashboard-container">
             {/* Filtreleme ve Arama */}
             <div className="flex flex-wrap gap-2">
                 <input
@@ -73,38 +65,12 @@ const TodoList = () => {
                 </select>
             </div>
 
-            {/* Todo Kartları */}
-            <div className="space-y-2">
-                {todos.map((todo) => (
-                    <div key={todo.id} className="border p-4 rounded shadow-sm flex justify-between items-center">
-                        <div>
-                            <div className="font-semibold">{todo.title}</div>
-                            <div className="text-sm text-gray-600">
-                                Durum: {todo.status} | Öncelik: {todo.priority}
-                            </div>
-                        </div>
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => handleToggleStatus(todo.id)}
-                                className="px-2 py-1 border rounded text-sm"
-                            >
-                                {todo.status === 'done' ? '✔' : '○'}
-                            </button>
-                            <button
-                                onClick={() => handleEdit(todo.id)}
-                                className="px-2 py-1 border rounded text-sm"
-                            >
-                                Düzenle
-                            </button>
-                            <button
-                                onClick={() => handleDelete(todo.id)}
-                                className="px-2 py-1 border rounded text-red-600 text-sm"
-                            >
-                                Sil
-                            </button>
-                        </div>
-                    </div>
-                ))}
+            <div className="mt-4">
+                <div className="todo-list">
+                    {todos.map((todo) => (
+                        <TodoItem key={todo.id} todo={todo} onStatusChange={handleStatusChange} />
+                    ))}
+                </div>
             </div>
 
             {/* Sayfalama */}
