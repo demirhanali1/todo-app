@@ -212,3 +212,81 @@ h1, h2, h3, h4 {
   color: #6b7280;
   padding: 0 4px;
 }
+
+.todo-form-container {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+  font-family: Arial, sans-serif;
+}
+
+.todo-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.todo-form .form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-form label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.todo-form input,
+.todo-form textarea,
+.todo-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.todo-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.error {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 4px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

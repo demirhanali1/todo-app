@@ -24,6 +24,11 @@ export const getTodos = async (nextPage = null, searchParam = null, statusFilter
     return res.data.data;
 };
 
+export const createTodo = async (values) => {
+    const res = await api.post('/todos', values);
+    return res.data.data;
+};
+
 export const getDashboardApi = async () => {
     const res = await api.get('/dashboard');
     return res.data.data;
