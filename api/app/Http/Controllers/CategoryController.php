@@ -21,7 +21,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return ResponseFormatter::returnOk(
+            message: 'success',
+            data: $this->service->index()
+        );
     }
 
     /**

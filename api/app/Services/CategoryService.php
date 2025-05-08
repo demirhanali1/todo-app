@@ -17,4 +17,9 @@ class CategoryService
     {
         return $this->repo->create($data);
     }
+
+    public function index()
+    {
+        return $this->repo->all();
+    }
 }

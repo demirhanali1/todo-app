@@ -10,4 +10,9 @@ class CategoryRepository
     {
         return Category::create($params);
     }
+
+    public function all()
+    {
+        return Category::all();
+    }
 }
