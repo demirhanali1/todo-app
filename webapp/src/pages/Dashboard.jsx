@@ -36,7 +36,7 @@ const Dashboard = () => {
 
             <div className="nav-buttons">
                 <button className="nav-btn" onClick={() => navigate('/todos')}>Todo List</button>
-                <button className="nav-btn">Todo Oluştur</button>
+                <button className="nav-btn" onClick={() => navigate('/todo-create')}>Todo Oluştur</button>
             </div>
 
             <div className="status-grid">
