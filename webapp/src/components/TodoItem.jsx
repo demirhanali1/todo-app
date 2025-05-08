@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TodoItem = ({ todo, onStatusChange }) => {
-    const statuses = ['pending', 'in_progress', 'completed'];
+    const statuses = ['pending', 'in_progress', 'completed', 'cancelled'];
 
     return (
         <div className="todo-item">

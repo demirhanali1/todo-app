@@ -26,7 +26,6 @@ h1, h2, h3, h4 {
 .section-title {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
 }
 
 .status-grid {
@@ -94,6 +93,11 @@ h1, h2, h3, h4 {
   justify-content: flex-start;
   gap: 1rem;
   margin-bottom: 1.5rem;
+  margin-top: 1rem;
+}
+
+.marginLeft {
+  margin-left: 1rem;
 }
 
 .nav-btn {
@@ -183,6 +187,11 @@ h1, h2, h3, h4 {
   color: #1f2937;
   border-radius: 4px;
   font-weight: 500;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
 }
 
 .pagination-number-button {
