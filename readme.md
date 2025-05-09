@@ -2,11 +2,30 @@
 
 ### İçindekiler
 
+- [Kurulum Adımları](#kurulum-adımları)
 - [Tech Stack](#tech-stack)
 - [API](#api)
 - - [Yazılım Prensipleri](#yazılım-prensipleri)
 - - [Kod Organizasyonu ve Mimari](#kod-organizasyonu-ve-mimari)
 - [Web App](#web-app)
+
+## Kurulum Adımları
+Proje root dizininde aşağıdaki komut ile container’ı ayağa kaldırın:
+
+  ```
+    docker compose up -d --build
+```
+
+Uygulama container’ına bağlanıp migration ve seed işlemlerini gerçekleştirin:
+
+  ```
+    docker exec -it laravel-app bash
+    php artisan migrate --seed
+```
+
+Projeyi Tarayıcıda Açın:
+
+[http://localhost:5173](http://localhost:5173)
 
 ## Tech Stack
 
@@ -96,7 +115,6 @@ Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
 - **React Router v6+** (sayfalar arası yönlendirme)
 - **Axios** (API istekleri)
 - **React Hook Form** + **Yup** (form ve validasyon yönetimi)
-- **Tailwind CSS** (UI bileşenleri ve stillendirme)
 
 ### Sayfalar
 
@@ -107,19 +125,12 @@ Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
 
 2. **Todo Listesi Sayfası**
   - Arama ve filtreleme
-  - Sıralama seçenekleri
-  - Sayfalama desteği
-  - Hızlı durum güncelleme, silme ve düzenleme
+  - Hızlı durum güncelleme ve silme
 
-3. **Todo Detay/Düzenleme Sayfası**
+3. **Todo Oluşturma Sayfası**
   - Başlık, açıklama, tarih ve kategoriler için form
   - Çoklu kategori seçimi
-  - Tarih seçici ile bitiş tarihi
   - Yup validasyonu
-
-4. **Kategori Yönetimi (Bonus)**
-  - Kategori ekleme, düzenleme, silme
-  - Renk atama
 
 ### Bileşenler
 
@@ -129,6 +140,4 @@ Proje katmanlı mimari prensiplerine göre yapılandırılmıştır:
 - **TodoFilter**: Arama, filtreleme ve sıralama kontrolleri
 - **StatusBadge**: Todo'nun durum rozetleri
 - **PriorityIndicator**: Öncelik gösterge simgesi
-- **StatePagination**: Sayfalama kontrol bileşeni
 - **CategorySelector**: Çoklu seçim ile kategori belirleme
-- **ConfirmationModal**: Silme işlemleri için onay modali
