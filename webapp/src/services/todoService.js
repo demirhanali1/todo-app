@@ -29,6 +29,11 @@ export const createTodo = async (values) => {
     return res.data.data;
 };
 
+export const deleteTodo = async (todoId) => {
+    const res = await api.delete('/todos/' + todoId);
+    return res.data.data;
+};
+
 export const getDashboardApi = async () => {
     const res = await api.get('/dashboard');
     return res.data.data;

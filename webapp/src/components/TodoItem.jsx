@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
+import ConfirmModal from "./ConfirmModal.jsx";
+import {deleteTodo} from "../services/todoService.js";
+import {useNavigate} from "react-router-dom";
 
 const TodoItem = ({ todo, onStatusChange }) => {
+    const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
     const statuses = ['pending', 'in_progress', 'completed', 'cancelled'];
     const statusColors = {
         pending: "#f0ad4e",
@@ -13,6 +18,12 @@ const TodoItem = ({ todo, onStatusChange }) => {
         low: "#5bc0de",
         medium: "#f0ad4e",
         high: "#d9534f",
+    };
+
+    const handleDelete = async () => {
+        await deleteTodo(todo.id);
+        setShowModal(false);
+        navigate(0);
     };
 
     return (
@@ -50,9 +61,16 @@ const TodoItem = ({ todo, onStatusChange }) => {
                 </select>
 
                 <div className="todo-actions">
-                    <button className="edit-btn">Düzenle</button>
-                    <button className="delete-btn">Sil</button>
+                    <button className="delete-btn" onClick={() => setShowModal(true)}>Sil</button>
                 </div>
+
+                <ConfirmModal
+                    isOpen={showModal}
+                    title="Emin misiniz?"
+                    message="Bu öğeyi silmek istediğinize emin misiniz?"
+                    onConfirm={handleDelete}
+                    onCancel={() => setShowModal(false)}
+                />
             </div>
         </div>
     );
